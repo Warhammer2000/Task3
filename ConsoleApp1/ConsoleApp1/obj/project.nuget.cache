@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "frMCPea9UGKCtSvKhrMBX+A2ISzvl3pMm0zi/JCkJa9NMYkrWY1ZWtDFdBluqqW1TIkgIvZRiuhMuz8QZpZkhA==",
+  "dgSpecHash": "Jpdz1Gkqklna13f+910gSaTfbnzVWpSDq7cyBcrWpU0DbXGR999olxfoo/IsDKPr7T50M5/PJzPZbswd+Zm2rw==",
   "success": true,
   "projectFilePath": "C:\\Itransition_Internship\\task3\\ConsoleApp1\\ConsoleApp1\\ConsoleApp1.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Administrator\\.nuget\\packages\\betterconsoletables\\1.1.3\\betterconsoletables.1.1.3.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\consoletables\\2.6.1\\consoletables.2.6.1.nupkg.sha512"
+  ],
   "logs": []
 }

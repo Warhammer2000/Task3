@@ -13,3 +13,7 @@ C:\Itransition_Internship\task3\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\Console
 C:\Itransition_Internship\task3\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.genruntimeconfig.cache
 C:\Itransition_Internship\task3\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\ref\ConsoleApp1.dll
 C:\Itransition_Internship\task3\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.sourcelink.json
+C:\Itransition_Internship\task3\ConsoleApp1\ConsoleApp1\bin\Debug\net8.0\ConsoleTables.dll
+C:\Itransition_Internship\task3\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.csproj.AssemblyReference.cache
+C:\Itransition_Internship\task3\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\ConsoleA.CB28C8CC.Up2Date
+C:\Itransition_Internship\task3\ConsoleApp1\ConsoleApp1\bin\Debug\net8.0\BetterConsoleTables.dll

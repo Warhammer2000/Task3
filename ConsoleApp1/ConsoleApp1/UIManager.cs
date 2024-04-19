@@ -1,7 +1,8 @@
-﻿class UIManager
+﻿using BetterConsoleTables;
+class UIManager
 {
     private readonly GameLogic gameLogic;
-
+  
     public UIManager(GameLogic gameLogic)
     {
         this.gameLogic = gameLogic;
@@ -83,45 +84,40 @@
 
     public void DisplayHelp()
     {
-        int pageSize = 5;
-        int totalPages = (int)Math.Ceiling(gameLogic.Moves.Length / (double)pageSize);
-        int currentPage = 0;
+        var table = new Table();
+        table.Config = TableConfiguration.UnicodeAlt();
 
-        Console.Clear();
-        Console.WriteLine("Помощь - Условия победы:");
-        Console.WriteLine("+-------------+" + string.Concat(Enumerable.Repeat("--------+", pageSize)));
-
-
-        Console.Write("| v PC\\User > |");
-        for (int j = currentPage * pageSize; j < Math.Min((currentPage + 1) * pageSize, gameLogic.Moves.Length); j++)
+        table.AddColumn("v PC\\User >");
+        foreach (var move in gameLogic.Moves)
         {
-            Console.Write($" {gameLogic.Moves[j],-6} |");
+            table.AddColumn(move);
         }
-        Console.WriteLine();
-        Console.WriteLine("+-------------+" + string.Concat(Enumerable.Repeat("--------+", pageSize)));
 
-        for (int i = 0; i < gameLogic.Moves.Length; i++)
+        int n = gameLogic.Moves.Length;
+        for (int i = 0; i < n; i++)
         {
-            Console.Write($"| {gameLogic.Moves[i],-11} |");
-            for (int j = currentPage * pageSize; j < Math.Min((currentPage + 1) * pageSize, gameLogic.Moves.Length); j++)
+            var row = new string[n + 1];
+            row[0] = gameLogic.Moves[i];
+
+            for (int j = 0; j < n; j++)
             {
                 if (i == j)
                 {
-                    Console.Write(" Draw  |");
+                    row[j + 1] = "Draw";
                 }
                 else
                 {
-                    int n = gameLogic.Moves.Length;
                     int winRange = n / 2;
                     int diff = (j - i + n) % n;
-                    Console.Write((diff <= winRange && diff != 0) ? " Win   |" : " Lose  |");
+                    row[j + 1] = (diff > 0 && diff <= winRange) ? "Win" : "Lose";
                 }
+                
             }
-            Console.WriteLine();
-            Console.WriteLine("+-------------+" + string.Concat(Enumerable.Repeat("--------+", pageSize)));
+
+            table.AddRow(row);
         }
-
+        Console.WriteLine("Помощь - Условия победы:");
+        Console.WriteLine(table.ToString());
     }
-
-
 }
+

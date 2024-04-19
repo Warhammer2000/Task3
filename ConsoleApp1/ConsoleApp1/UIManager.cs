@@ -22,7 +22,6 @@
                 DisplayMoves();
                 continue;
             }
-
             if (int.TryParse(input, out int userChoice) && userChoice >= 0 && userChoice <= gameLogic.MovesCount)
             {
                 if (userChoice == 0) break;
@@ -45,77 +44,83 @@
         }
         Console.WriteLine("0 - выход");
         Console.WriteLine("? - помощь");
+
     }
 
     private void PlayRound(int userMove)
     {
+        int computerMove = gameLogic.ComputerMove;
         Console.WriteLine($"Ваш ход: {gameLogic.GetMove(userMove)}");
-        Console.WriteLine($"Ход компьютера: {gameLogic.GetMove(gameLogic.ComputerMove)}");
-        if (gameLogic.Key != null) Console.WriteLine($"HMAC ключ: {BitConverter.ToString(gameLogic.Key).Replace("-", "")}");
-        else Console.WriteLine("HMAC ключ: не доступен");
+        Console.WriteLine($"Ход компьютера: {gameLogic.GetMove(computerMove)}");
+
+        int n = gameLogic.Moves.Length;
+        int winRange = n / 2;
+        int diff = (computerMove - userMove + n) % n;
+
+        if (diff == 0)
+        {
+            Console.WriteLine("Ничья!");
+        }
+        else if (diff <= winRange)
+        {
+            Console.WriteLine("Компьютер выиграл!");
+        }
+        else
+        {
+            Console.WriteLine("Вы выиграли!");
+        }
+
+        if (gameLogic.Key != null)
+        {
+            Console.WriteLine($"HMAC ключ: {BitConverter.ToString(gameLogic.Key).Replace("-", "")}");
+        }
+        else
+        {
+            Console.WriteLine("HMAC ключ: не доступен");
+        }
     }
 
 
     public void DisplayHelp()
     {
-        int pageSize = 5; 
+        int pageSize = 5;
         int totalPages = (int)Math.Ceiling(gameLogic.Moves.Length / (double)pageSize);
         int currentPage = 0;
-        bool exit = false;
 
-        while (!exit)
+        Console.Clear();
+        Console.WriteLine("Помощь - Условия победы:");
+        Console.WriteLine("+-------------+" + string.Concat(Enumerable.Repeat("--------+", pageSize)));
+
+
+        Console.Write("| v PC\\User > |");
+        for (int j = currentPage * pageSize; j < Math.Min((currentPage + 1) * pageSize, gameLogic.Moves.Length); j++)
         {
-            Console.Clear();
-            Console.WriteLine("Помощь - Условия победы:");
-            Console.WriteLine("+-------------+" + string.Concat(Enumerable.Repeat("--------+", pageSize)));
+            Console.Write($" {gameLogic.Moves[j],-6} |");
+        }
+        Console.WriteLine();
+        Console.WriteLine("+-------------+" + string.Concat(Enumerable.Repeat("--------+", pageSize)));
 
-            
-            Console.Write("| v PC\\User > |");
+        for (int i = 0; i < gameLogic.Moves.Length; i++)
+        {
+            Console.Write($"| {gameLogic.Moves[i],-11} |");
             for (int j = currentPage * pageSize; j < Math.Min((currentPage + 1) * pageSize, gameLogic.Moves.Length); j++)
             {
-                Console.Write($" {gameLogic.Moves[j],-6} |");
+                if (i == j)
+                {
+                    Console.Write(" Draw  |");
+                }
+                else
+                {
+                    int n = gameLogic.Moves.Length;
+                    int winRange = n / 2;
+                    int diff = (j - i + n) % n;
+                    Console.Write((diff <= winRange && diff != 0) ? " Win   |" : " Lose  |");
+                }
             }
             Console.WriteLine();
             Console.WriteLine("+-------------+" + string.Concat(Enumerable.Repeat("--------+", pageSize)));
-
-            for (int i = 0; i < gameLogic.Moves.Length; i++)
-            {
-                Console.Write($"| {gameLogic.Moves[i],-11} |");
-                for (int j = currentPage * pageSize; j < Math.Min((currentPage + 1) * pageSize, gameLogic.Moves.Length); j++)
-                {
-                    if (i == j)
-                    {
-                        Console.Write(" Draw  |");
-                    }
-                    else
-                    {
-                        int n = gameLogic.Moves.Length;
-                        int winRange = n / 2;
-                        int diff = (j - i + n) % n;
-                        Console.Write((diff <= winRange && diff != 0) ? " Win   |" : " Lose  |");
-                    }
-                }
-                Console.WriteLine();
-                Console.WriteLine("+-------------+" + string.Concat(Enumerable.Repeat("--------+", pageSize)));
-            }
-
-            Console.WriteLine($"Страница {currentPage + 1} из {totalPages}. 'n' - следующая, 'p' - предыдущая, 'e' - выход.");
-            var key = Console.ReadKey().Key;
-            switch (key)
-            {
-                case ConsoleKey.N:
-                    if (currentPage < totalPages - 1) currentPage++;
-                    break;
-                case ConsoleKey.P:
-                    if (currentPage > 0) currentPage--;
-                    break;
-                case ConsoleKey.E:
-                    exit = true;
-                    Console.Clear();
-                    DisplayMoves();
-                    break;
-            }
         }
+
     }
 
 

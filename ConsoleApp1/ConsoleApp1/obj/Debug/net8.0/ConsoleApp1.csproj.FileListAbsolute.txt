@@ -12,3 +12,4 @@ C:\Itransition_Internship\task3\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\refint\
 C:\Itransition_Internship\task3\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.pdb
 C:\Itransition_Internship\task3\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.genruntimeconfig.cache
 C:\Itransition_Internship\task3\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\ref\ConsoleApp1.dll
+C:\Itransition_Internship\task3\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.sourcelink.json
